@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MyProjectDirect/MyMaterialProject/app/src/main/res/drawable-v24/ic_wikipedia.xml" value="0.2703125" />
+        <entry key="..\:/MyProjectDirect/MyMaterialProject/app/src/main/res/layout/fragment_picture_of_the_day.xml" value="0.25416666666666665" />
         <entry key="..\:/MyProjectDirect/MyMaterialProject/app/src/main/res/layout/main_activity.xml" value="0.11302083333333333" />
       </map>
     </option>
