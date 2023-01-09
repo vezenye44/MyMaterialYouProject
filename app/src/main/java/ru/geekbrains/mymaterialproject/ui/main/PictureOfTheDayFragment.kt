@@ -7,10 +7,13 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import ru.geekbrains.mymaterialproject.R
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayData
 import ru.geekbrains.mymaterialproject.databinding.FragmentPictureOfTheDayBinding
@@ -19,6 +22,12 @@ class PictureOfTheDayFragment : Fragment() {
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
+    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
 
     //Ленивая инициализация модели
     private val viewModel: PictureOfTheDayViewModel by lazy {
@@ -41,7 +50,10 @@ class PictureOfTheDayFragment : Fragment() {
                 data = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
         }
+
+        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
     }
+
 
     private fun renderData(data: PictureOfTheDayData) {
         when (data) {
@@ -65,6 +77,7 @@ class PictureOfTheDayFragment : Fragment() {
             is PictureOfTheDayData.Error -> {
                 showError(data.error.message)
             }
+            else -> {}
         }
     }
 
