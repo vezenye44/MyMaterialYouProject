@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MyProjectDirect/MyMaterialProject/app/src/main/res/drawable-v24/ic_hamburger_menu_bottom_bar.xml" value="0.12916666666666668" />
         <entry key="..\:/MyProjectDirect/MyMaterialProject/app/src/main/res/drawable-v24/ic_wikipedia.xml" value="0.2703125" />
+        <entry key="..\:/MyProjectDirect/MyMaterialProject/app/src/main/res/layout/bottom_navigation_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/MyProjectDirect/MyMaterialProject/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/MyProjectDirect/MyMaterialProject/app/src/main/res/layout/fragment_picture_of_the_day.xml" value="0.25416666666666665" />
         <entry key="..\:/MyProjectDirect/MyMaterialProject/app/src/main/res/layout/main_activity.xml" value="0.11302083333333333" />
+        <entry key="..\:/MyProjectDirect/MyMaterialProject/app/src/main/res/menu/menu_bottom_bar.xml" value="0.2677083333333333" />
+        <entry key="..\:/MyProjectDirect/MyMaterialProject/app/src/main/res/menu/menu_bottom_bar_other_screen.xml" value="0.2677083333333333" />
+        <entry key="..\:/MyProjectDirect/MyMaterialProject/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.26875" />
       </map>
     </option>
   </component>

@@ -3,20 +3,20 @@ package ru.geekbrains.mymaterialproject.ui.main
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import ru.geekbrains.mymaterialproject.R
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayData
 import ru.geekbrains.mymaterialproject.databinding.FragmentPictureOfTheDayBinding
+import ru.geekbrains.mymaterialproject.ui.MainActivity
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -51,9 +51,53 @@ class PictureOfTheDayFragment : Fragment() {
             })
         }
 
+        setBottomAppBar(view)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_bottom_bar, menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                activity?.let {
+                    BottomNavigationDrawerFragment().show(it.supportFragmentManager,"tag")
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setBottomAppBar(view: View) {
+        val context = activity as MainActivity
+        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
+        setHasOptionsMenu(true)
+        binding.fab.setOnClickListener {
+            if (isMain) {
+                isMain = false
+                binding.bottomAppBar.navigationIcon = null
+                binding.bottomAppBar.fabAlignmentMode =
+                    BottomAppBar.FAB_ALIGNMENT_MODE_END
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(context,
+                    R.drawable.ic_back_fab))
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
+            } else {
+                isMain = true
+                binding.bottomAppBar.navigationIcon =
+                    ContextCompat.getDrawable(context,
+                        R.drawable.ic_hamburger_menu_bottom_bar)
+                binding.bottomAppBar.fabAlignmentMode =
+                    BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                binding.fab.setImageDrawable(ContextCompat.getDrawable(context,
+                    R.drawable.ic_plus_fab))
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
+            }
+        }
+
+    }
 
     private fun renderData(data: PictureOfTheDayData) {
         when (data) {
@@ -69,6 +113,11 @@ class PictureOfTheDayFragment : Fragment() {
                         placeholder(R.drawable.ic_no_photo_vector)
                         crossfade(true)
                     }
+                    val bottomSheetDescriptionHeaderView : TextView? = requireActivity().findViewById<TextView>(R.id.bottomSheetDescriptionHeader)
+                    bottomSheetDescriptionHeaderView?.text = serverResponseData.title
+
+                    val bottomSheetDescriptionView : TextView? = requireActivity().findViewById<TextView>(R.id.bottomSheetDescription)
+                    bottomSheetDescriptionView?.text = serverResponseData.explanation
                 }
             }
             is PictureOfTheDayData.Loading -> {
@@ -95,5 +144,6 @@ class PictureOfTheDayFragment : Fragment() {
 
     companion object {
         fun newInstance() = PictureOfTheDayFragment()
+        private var isMain = true
     }
 }
