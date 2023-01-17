@@ -9,7 +9,7 @@
             android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.main.PictureOfTheDayFragment"
+            tools:context=".ui.pictureOfTheDay.PictureOfTheDayFragment"
             android:padding="10dp">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -56,6 +56,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            app:hideOnScroll="true"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:backgroundTint="?attr/colorPrimary"
             app:fabAlignmentMode="center"
             app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ru.geekbrains.mymaterialproject.R
 import ru.geekbrains.mymaterialproject.databinding.MainActivityBinding
-import ru.geekbrains.mymaterialproject.ui.main.PictureOfTheDayFragment
+import ru.geekbrains.mymaterialproject.ui.pictureOfTheDay.PictureOfTheDayFragment
 
 class MainActivity : AppCompatActivity() {
 

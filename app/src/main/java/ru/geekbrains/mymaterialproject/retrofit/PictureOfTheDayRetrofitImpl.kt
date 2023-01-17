@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
-class PictureOfTheDayRetrofitImpl {
+class PictureOfTheDayRetrofitImpl : PictureOfTheDayRetrofit {
 
     private val baseUrl = "https://api.nasa.gov/"
 

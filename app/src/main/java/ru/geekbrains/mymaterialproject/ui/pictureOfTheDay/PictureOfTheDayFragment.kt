@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.ui.main
+package ru.geekbrains.mymaterialproject.ui.pictureOfTheDay
 
 import android.content.Intent
 import android.net.Uri
@@ -17,6 +17,7 @@ import ru.geekbrains.mymaterialproject.R
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayData
 import ru.geekbrains.mymaterialproject.databinding.FragmentPictureOfTheDayBinding
 import ru.geekbrains.mymaterialproject.ui.MainActivity
+import ru.geekbrains.mymaterialproject.viewmodel.pictureOfTheDay.PictureOfTheDayViewModel
 
 class PictureOfTheDayFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.ui.main
+package ru.geekbrains.mymaterialproject.viewmodel.pictureOfTheDay
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,11 +9,12 @@ import retrofit2.Response
 import ru.geekbrains.mymaterialproject.BuildConfig
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayDTO
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayData
+import ru.geekbrains.mymaterialproject.retrofit.PictureOfTheDayRetrofit
 import ru.geekbrains.mymaterialproject.retrofit.PictureOfTheDayRetrofitImpl
 
 class PictureOfTheDayViewModel(
     private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDayData> = MutableLiveData(),
-    private val retrofitImpl: PictureOfTheDayRetrofitImpl = PictureOfTheDayRetrofitImpl()
+    private val retrofitImpl: PictureOfTheDayRetrofit = PictureOfTheDayRetrofitImpl()
 ) :
     ViewModel() {
     fun getData(): LiveData<PictureOfTheDayData> {
@@ -27,7 +28,7 @@ class PictureOfTheDayViewModel(
         if (apiKey.isBlank()) {
             PictureOfTheDayData.Error(Throwable("You need API key"))
         } else {
-            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey)
+            (retrofitImpl as PictureOfTheDayRetrofitImpl).getRetrofitImpl().getPictureOfTheDay(apiKey)
                 .enqueue(object : Callback<PictureOfTheDayDTO> {
                     override fun onResponse(
                         call: Call<PictureOfTheDayDTO>,
