@@ -11,6 +11,7 @@ import ru.geekbrains.mymaterialproject.data.PictureOfTheDayDTO
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayData
 import ru.geekbrains.mymaterialproject.retrofit.PictureOfTheDayRetrofit
 import ru.geekbrains.mymaterialproject.retrofit.PictureOfTheDayRetrofitImpl
+import ru.geekbrains.mymaterialproject.util.date.*
 
 class PictureOfTheDayViewModel(
     private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDayData> = MutableLiveData(),
@@ -18,17 +19,29 @@ class PictureOfTheDayViewModel(
 ) :
     ViewModel() {
     fun getData(): LiveData<PictureOfTheDayData> {
-        sendServerRequest()
         return liveDataForViewToObserve
     }
 
-    private fun sendServerRequest() {
+    fun todayPictureOfTheDay(){
+        val date = getCurrentDateTime(TODAY).toString("yyyy-MM-dd")
+        sendServerRequest(date)
+    }
+    fun yesterdayPictureOfTheDay(){
+        val date = getCurrentDateTime(YESTERDAY).toString("yyyy-MM-dd")
+        sendServerRequest(date)
+    }
+    fun beforeYesterdayPictureOfTheDay(){
+        val date = getCurrentDateTime(BEFORE_YESTERDAY).toString("yyyy-MM-dd")
+        sendServerRequest(date)
+    }
+
+    private fun sendServerRequest(date : String) {
         liveDataForViewToObserve.value = PictureOfTheDayData.Loading(null)
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
             PictureOfTheDayData.Error(Throwable("You need API key"))
         } else {
-            (retrofitImpl as PictureOfTheDayRetrofitImpl).getRetrofitImpl().getPictureOfTheDay(apiKey)
+            (retrofitImpl as PictureOfTheDayRetrofitImpl).getRetrofitImpl().getPictureOfTheDayByDate(apiKey, date)
                 .enqueue(object : Callback<PictureOfTheDayDTO> {
                     override fun onResponse(
                         call: Call<PictureOfTheDayDTO>,

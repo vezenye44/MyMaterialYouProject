@@ -23,5 +23,13 @@
         <item name="colorSecondaryVariant">#ffc107</item>
         <item name="colorOnSecondary">@color/black</item>
 
+        <item name="chipStyle">@style/MyChipStyle</item>
+
     </style>
+
+    <style name="MyChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@drawable/selector_chose_chip_background_color</item>
+        <item name="chipIcon">@drawable/ic_baseline_download_done_24</item>
+    </style>
+
 </resources>

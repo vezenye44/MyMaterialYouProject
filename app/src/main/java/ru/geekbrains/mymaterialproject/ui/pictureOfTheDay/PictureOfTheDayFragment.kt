@@ -25,11 +25,6 @@ class PictureOfTheDayFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
-    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-    }
-
     //Ленивая инициализация модели
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(PictureOfTheDayViewModel::class.java)
@@ -52,6 +47,12 @@ class PictureOfTheDayFragment : Fragment() {
             })
         }
 
+        if (savedInstanceState == null) {
+            binding.chipToday.isChecked = true
+            viewModel.todayPictureOfTheDay()
+        }
+
+        setListenersForChips()
         setBottomAppBar(view)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
     }
@@ -60,15 +61,35 @@ class PictureOfTheDayFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_bottom_bar, menu)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
                 activity?.let {
-                    BottomNavigationDrawerFragment().show(it.supportFragmentManager,"tag")
+                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
                 }
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
+
+    private fun setListenersForChips() {
+        with(binding) {
+            chipToday.setOnClickListener {
+                viewModel.todayPictureOfTheDay()
+            }
+            chipYesterday.setOnClickListener {
+                viewModel.yesterdayPictureOfTheDay()
+            }
+            chipBeforeYesterday.setOnClickListener {
+                viewModel.beforeYesterdayPictureOfTheDay()
+            }
+        }
     }
 
     private fun setBottomAppBar(view: View) {
@@ -82,18 +103,27 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.bottomAppBar.fabAlignmentMode =
                     BottomAppBar.FAB_ALIGNMENT_MODE_END
                 binding.fab.setImageDrawable(
-                    ContextCompat.getDrawable(context,
-                    R.drawable.ic_back_fab))
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_back_fab
+                    )
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
             } else {
                 isMain = true
                 binding.bottomAppBar.navigationIcon =
-                    ContextCompat.getDrawable(context,
-                        R.drawable.ic_hamburger_menu_bottom_bar)
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_hamburger_menu_bottom_bar
+                    )
                 binding.bottomAppBar.fabAlignmentMode =
                     BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(context,
-                    R.drawable.ic_plus_fab))
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_plus_fab
+                    )
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
         }
@@ -101,6 +131,11 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun renderData(data: PictureOfTheDayData) {
+        val bottomSheetDescriptionHeaderView: TextView? =
+            requireActivity().findViewById<TextView>(R.id.bottomSheetDescriptionHeader)
+        val bottomSheetDescriptionView: TextView? =
+            requireActivity().findViewById<TextView>(R.id.bottomSheetDescription)
+
         when (data) {
             is PictureOfTheDayData.Success -> {
                 val serverResponseData = data.serverResponseData
@@ -114,18 +149,19 @@ class PictureOfTheDayFragment : Fragment() {
                         placeholder(R.drawable.ic_no_photo_vector)
                         crossfade(true)
                     }
-                    val bottomSheetDescriptionHeaderView : TextView? = requireActivity().findViewById<TextView>(R.id.bottomSheetDescriptionHeader)
                     bottomSheetDescriptionHeaderView?.text = serverResponseData.title
-
-                    val bottomSheetDescriptionView : TextView? = requireActivity().findViewById<TextView>(R.id.bottomSheetDescription)
                     bottomSheetDescriptionView?.text = serverResponseData.explanation
                 }
             }
             is PictureOfTheDayData.Loading -> {
                 binding.imageView.load(R.drawable.ic_image_loading)
+                bottomSheetDescriptionHeaderView?.text = ""
+                bottomSheetDescriptionView?.text = ""
             }
             is PictureOfTheDayData.Error -> {
                 showError(data.error.message)
+                bottomSheetDescriptionHeaderView?.text = ""
+                bottomSheetDescriptionView?.text = ""
             }
             else -> {}
         }

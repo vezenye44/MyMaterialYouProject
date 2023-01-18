@@ -6,4 +6,7 @@
     <string name="favourite">favourite</string>
     <string name="settings">settings</string>
     <string name="search">Search</string>
+    <string name="chip_group_today">Сегодня</string>
+    <string name="chip_group_yesterday">Вчера</string>
+    <string name="chip_group_before_yesterday">Позавчера</string>
 </resources>

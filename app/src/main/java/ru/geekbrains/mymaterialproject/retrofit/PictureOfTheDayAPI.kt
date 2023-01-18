@@ -8,4 +8,7 @@ import ru.geekbrains.mymaterialproject.data.PictureOfTheDayDTO
 interface PictureOfTheDayAPI {
     @GET("planetary/apod")
     fun getPictureOfTheDay(@Query("api_key") apiKey: String): Call<PictureOfTheDayDTO>
+
+    @GET("planetary/apod")
+    fun getPictureOfTheDayByDate(@Query("api_key") apiKey: String, @Query("date") date: String): Call<PictureOfTheDayDTO>
 }
