@@ -1,5 +1,6 @@
 package ru.geekbrains.mymaterialproject.ui.pictureOfTheDay
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -17,6 +18,7 @@ import ru.geekbrains.mymaterialproject.R
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayData
 import ru.geekbrains.mymaterialproject.databinding.FragmentPictureOfTheDayBinding
 import ru.geekbrains.mymaterialproject.ui.MainActivity
+import ru.geekbrains.mymaterialproject.ui.settings.SettingsFragment
 import ru.geekbrains.mymaterialproject.viewmodel.pictureOfTheDay.PictureOfTheDayViewModel
 
 class PictureOfTheDayFragment : Fragment() {
@@ -50,6 +52,27 @@ class PictureOfTheDayFragment : Fragment() {
         if (savedInstanceState == null) {
             binding.chipToday.isChecked = true
             viewModel.todayPictureOfTheDay()
+        } else {
+            requireActivity().getSharedPreferences(MainActivity.KEY_SP, Activity.MODE_PRIVATE)
+                .getString(EXTRA_CHIP_SELECTED, "Empty")
+                .also { chipName ->
+                    when (chipName) {
+                        Chips.ChipToday.name -> {
+                            viewModel.todayPictureOfTheDay()
+                        }
+                        Chips.ChipYesterday.name -> {
+                            viewModel.yesterdayPictureOfTheDay()
+                        }
+                        Chips.ChipBeforeYesterday.name -> {
+                            viewModel.beforeYesterdayPictureOfTheDay()
+                        }
+                        "Empty" -> {
+                            binding.chipToday.isChecked = true
+                            viewModel.todayPictureOfTheDay()
+                        }
+                        else -> Throwable("Error in chip name selected | chipName = $chipName")
+                    }
+                }
         }
 
         setListenersForChips()
@@ -64,6 +87,10 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.app_bar_search -> {
+                requireActivity().supportFragmentManager.beginTransaction().hide(this)
+                    .add(R.id.container, SettingsFragment.newInstance(), "").addToBackStack("").commit()
+            }
             android.R.id.home -> {
                 activity?.let {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
@@ -82,14 +109,24 @@ class PictureOfTheDayFragment : Fragment() {
         with(binding) {
             chipToday.setOnClickListener {
                 viewModel.todayPictureOfTheDay()
+                saveChipSelectedPosition(Chips.ChipToday)
             }
             chipYesterday.setOnClickListener {
                 viewModel.yesterdayPictureOfTheDay()
+                saveChipSelectedPosition(Chips.ChipYesterday)
             }
             chipBeforeYesterday.setOnClickListener {
                 viewModel.beforeYesterdayPictureOfTheDay()
+                saveChipSelectedPosition(Chips.ChipBeforeYesterday)
             }
         }
+    }
+
+    private fun saveChipSelectedPosition(chipName: Chips) {
+        requireActivity().getSharedPreferences(MainActivity.KEY_SP, Activity.MODE_PRIVATE)
+            .edit()
+            .putString(EXTRA_CHIP_SELECTED, chipName.name)
+            .apply()
     }
 
     private fun setBottomAppBar(view: View) {
@@ -182,5 +219,12 @@ class PictureOfTheDayFragment : Fragment() {
     companion object {
         fun newInstance() = PictureOfTheDayFragment()
         private var isMain = true
+        const val EXTRA_CHIP_SELECTED = "EXTRA_CHIP_SELECTED"
+    }
+
+    sealed class Chips(val name: String) {
+        object ChipToday : Chips("CHIP_TODAY")
+        object ChipYesterday : Chips("CHIP_YESTERDAY")
+        object ChipBeforeYesterday : Chips("CHIP_BEFORE_YESTERDAY")
     }
 }
