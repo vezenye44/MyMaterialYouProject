@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="MyAppCustomTheme" parent="Theme.MyMaterialProject">
+    <style name="MyStrictTheme" parent="@style/MyAppCustomTheme">
         <!-- Primary and Secondary brand color. -->
         <item name="colorPrimary">#5d4037</item>
         <item name="colorPrimaryVariant">#3e2723</item>
@@ -22,14 +22,53 @@
         <item name="colorSecondary">#ffca28</item>
         <item name="colorSecondaryVariant">#ffc107</item>
         <item name="colorOnSecondary">@color/black</item>
+    </style>
 
+    <style name="MyDefaultDarkTheme" parent="MyAppCustomTheme">
+        <!-- Primary and Secondary brand color. -->
+        <item name="colorPrimary">#757575</item>
+        <item name="colorPrimaryVariant">#424242</item>
+        <item name="backgroundColor">#607d8b</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">#757575</item>
+        <item name="colorSecondaryVariant">#424242</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="MyDarkTheme" parent="MyDefaultDarkTheme">
+    </style>
+
+    <style name="MyLightTheme" parent="@style/MyAppCustomTheme">
+        <!-- Primary and Secondary brand color. -->
+        <item name="colorPrimary">#388e3c</item>
+        <item name="colorPrimaryVariant">#1b5e20</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorSecondary">#ffeb3b</item>
+        <item name="colorSecondaryVariant">#fbc02d</item>
+        <item name="colorOnSecondary">@color/black</item>
+    </style>
+
+    <style name="MyAppCustomTheme" parent="Theme.MyMaterialProject">
         <item name="chipStyle">@style/MyChipStyle</item>
+        <item name="tabStyle">@style/MyTabStyle</item>
 
+        <item name="bottomSheetBackground">#f6f6fa</item>
+
+        <item name="android:forceDarkAllowed" tools:targetApi="q">true</item>
+
+    </style>
+
+    <style name="MyTabStyle" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabIndicatorFullWidth">false</item>
     </style>
 
     <style name="MyChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@drawable/selector_chose_chip_background_color</item>
         <item name="chipIcon">@drawable/ic_baseline_download_done_24</item>
+        <item name="fontFamily">@font/roboto_light_italic</item>
     </style>
 
 </resources>

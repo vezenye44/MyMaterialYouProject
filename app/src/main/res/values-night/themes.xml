@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="MyAppCustomTheme" parent="Theme.MyMaterialProject">
+        <item name="chipStyle">@style/MyChipStyle</item>
+        <item name="tabStyle">@style/MyTabStyle</item>
+
+        <item name="bottomSheetBackground">#30292E</item>
+
+        <item name="android:forceDarkAllowed" tools:targetApi="q">true</item>
+
+    </style>
+</resources>
