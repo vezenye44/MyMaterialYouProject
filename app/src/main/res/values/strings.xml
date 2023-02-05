@@ -1,11 +1,19 @@
 <resources>
     <string name="app_name">MyMaterialProject</string>
     <string name="photo_of_the_day_stub">Photo of the day</string>
+
     <string name="search_wiki">Найти в Википедии</string>
     <string name="wiki_helper_text">Поищите термин в википедии</string>
+
     <string name="favourite">favourite</string>
     <string name="settings">settings</string>
     <string name="search">Search</string>
+
+    <string name="play_video_btn">Play in</string>
+
+    <string name="player_play">Play</string>
+    <string name="player_pause">Pause</string>
+    <string name="player_stop">Stop</string>
 
     <string name="chip_group_today">Сегодня</string>
     <string name="chip_group_yesterday">Вчера</string>
@@ -14,4 +22,8 @@
     <string name="tab_item_strict_theme">Строгая</string>
     <string name="tab_item_light_theme">Светлая</string>
     <string name="tab_item_dark_theme">Темная</string>
+    <string name="potd">POTD</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nasa">NASA</string>
 </resources>
