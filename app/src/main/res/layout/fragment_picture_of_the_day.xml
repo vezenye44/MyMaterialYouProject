@@ -27,7 +27,7 @@
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp"
                 app:helperText="@string/wiki_helper_text"
-                app:layout_constraintBottom_toTopOf="@+id/chipGroup"
+                app:layout_constraintBottom_toTopOf="@+id/chipContainer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
             <com.google.android.material.textfield.TextInputEditText
@@ -36,31 +36,57 @@
                     android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup"
-                android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chipContainer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:singleSelection="true"
-                app:selectionRequired="true"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/imageView">
-            <com.google.android.material.chip.Chip
-                    android:id="@+id/chipToday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/chip_group_today"/>
-            <com.google.android.material.chip.Chip
-                    android:id="@+id/chipYesterday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/chip_group_yesterday"/>
-            <com.google.android.material.chip.Chip
-                    android:id="@+id/chipBeforeYesterday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/chip_group_before_yesterday"/>
 
-        </com.google.android.material.chip.ChipGroup>
+            <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:selectionRequired="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.chip.Chip
+                        android:id="@+id/chipToday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chip_group_today"/>
+                <com.google.android.material.chip.Chip
+                        android:id="@+id/chipYesterday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chip_group_yesterday"/>
+                <com.google.android.material.chip.Chip
+                        android:id="@+id/chipBeforeYesterday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chip_group_before_yesterday"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroup2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.chip.Chip
+                        android:id="@+id/chipHdImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="hd"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ru.geekbrains.mymaterialproject.util.EquilateralImageView
                 android:id="@+id/imageView"
@@ -73,28 +99,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_no_photo_vector"/>
+
+        <Button
+                style="@style/Widget.Material3.Button.TextButton.Dialog.Icon"
+                app:icon="@drawable/ic_play_btn"
+                android:id="@+id/playVideoBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/play_video_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/bottom_sheet_layout"/>
-
-    <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottom_app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:hideOnScroll="true"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:backgroundTint="?attr/colorPrimary"
-            app:fabAlignmentMode="center"
-            app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorAccent"
-            app:layout_anchor="@id/bottom_app_bar"
-            app:srcCompat="@drawable/ic_plus_fab"
-            app:tint="#FFFFFF" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

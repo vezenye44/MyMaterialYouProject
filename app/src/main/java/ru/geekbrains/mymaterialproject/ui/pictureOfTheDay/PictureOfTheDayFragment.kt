@@ -8,17 +8,16 @@ import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import ru.geekbrains.mymaterialproject.R
+import ru.geekbrains.mymaterialproject.data.PictureOfTheDayDTO
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayData
 import ru.geekbrains.mymaterialproject.databinding.FragmentPictureOfTheDayBinding
 import ru.geekbrains.mymaterialproject.ui.MainActivity
-import ru.geekbrains.mymaterialproject.ui.settings.SettingsFragment
 import ru.geekbrains.mymaterialproject.viewmodel.pictureOfTheDay.PictureOfTheDayViewModel
 
 class PictureOfTheDayFragment : Fragment() {
@@ -26,6 +25,7 @@ class PictureOfTheDayFragment : Fragment() {
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private var selectedChipName: String? = null
 
     //Ленивая инициализация модели
     private val viewModel: PictureOfTheDayViewModel by lazy {
@@ -49,55 +49,41 @@ class PictureOfTheDayFragment : Fragment() {
             })
         }
 
-        if (savedInstanceState == null) {
-            binding.chipToday.isChecked = true
-            viewModel.todayPictureOfTheDay()
-        } else {
-            requireActivity().getSharedPreferences(MainActivity.KEY_SP, Activity.MODE_PRIVATE)
-                .getString(EXTRA_CHIP_SELECTED, "Empty")
-                .also { chipName ->
-                    when (chipName) {
-                        Chips.ChipToday.name -> {
-                            viewModel.todayPictureOfTheDay()
-                        }
-                        Chips.ChipYesterday.name -> {
-                            viewModel.yesterdayPictureOfTheDay()
-                        }
-                        Chips.ChipBeforeYesterday.name -> {
-                            viewModel.beforeYesterdayPictureOfTheDay()
-                        }
-                        "Empty" -> {
-                            binding.chipToday.isChecked = true
-                            viewModel.todayPictureOfTheDay()
-                        }
-                        else -> Throwable("Error in chip name selected | chipName = $chipName")
-                    }
-                }
-        }
+        restoringChipState()
 
         setListenersForChips()
-        setBottomAppBar(view)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+    }
+
+    private fun restoringChipState() {
+        requireActivity().getSharedPreferences(MainActivity.KEY_SP, Activity.MODE_PRIVATE)
+            .getString(EXTRA_CHIP_SELECTED, "Empty")
+            .also { chipName ->
+                when (chipName) {
+                    Chips.ChipToday.name -> {
+                        binding.chipToday.isChecked = true
+                        viewModel.todayPictureOfTheDay()
+                    }
+                    Chips.ChipYesterday.name -> {
+                        binding.chipYesterday.isChecked = true
+                        viewModel.yesterdayPictureOfTheDay()
+                    }
+                    Chips.ChipBeforeYesterday.name -> {
+                        binding.chipBeforeYesterday.isChecked = true
+                        viewModel.beforeYesterdayPictureOfTheDay()
+                    }
+                    "Empty" -> {
+                        binding.chipToday.isChecked = true
+                        viewModel.todayPictureOfTheDay()
+                    }
+                    else -> Throwable("Error in chip name selected | chipName = $chipName")
+                }
+            }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_bottom_bar, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.app_bar_search -> {
-                requireActivity().supportFragmentManager.beginTransaction().hide(this)
-                    .add(R.id.container, SettingsFragment.newInstance(), "").addToBackStack("").commit()
-            }
-            android.R.id.home -> {
-                activity?.let {
-                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-                }
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
@@ -129,79 +115,71 @@ class PictureOfTheDayFragment : Fragment() {
             .apply()
     }
 
-    private fun setBottomAppBar(view: View) {
-        val context = activity as MainActivity
-        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
-        setHasOptionsMenu(true)
-        binding.fab.setOnClickListener {
-            if (isMain) {
-                isMain = false
-                binding.bottomAppBar.navigationIcon = null
-                binding.bottomAppBar.fabAlignmentMode =
-                    BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.fab.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        context,
-                        R.drawable.ic_back_fab
-                    )
-                )
-                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
-            } else {
-                isMain = true
-                binding.bottomAppBar.navigationIcon =
-                    ContextCompat.getDrawable(
-                        context,
-                        R.drawable.ic_hamburger_menu_bottom_bar
-                    )
-                binding.bottomAppBar.fabAlignmentMode =
-                    BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.fab.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        context,
-                        R.drawable.ic_plus_fab
-                    )
-                )
-                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
-            }
-        }
-
+    private val bottomSheetDescriptionHeaderView by lazy {
+        requireActivity().findViewById<TextView>(R.id.bottomSheetDescriptionHeader)
+    }
+    private val bottomSheetDescriptionView by lazy {
+        requireActivity().findViewById<TextView>(R.id.bottomSheetDescription)
     }
 
     private fun renderData(data: PictureOfTheDayData) {
-        val bottomSheetDescriptionHeaderView: TextView? =
-            requireActivity().findViewById<TextView>(R.id.bottomSheetDescriptionHeader)
-        val bottomSheetDescriptionView: TextView? =
-            requireActivity().findViewById<TextView>(R.id.bottomSheetDescription)
-
         when (data) {
             is PictureOfTheDayData.Success -> {
                 val serverResponseData = data.serverResponseData
-                val url = serverResponseData.url
-                if (url.isNullOrEmpty()) {
+                //val url = serverResponseData.url
+                if (serverResponseData.url.isNullOrEmpty()) {
                     showError("Link is empty")
+                } else if (serverResponseData.mediaType == "image") {
+                    loadImage(serverResponseData)
                 } else {
-                    binding.imageView.load(url) {
-                        lifecycle(this@PictureOfTheDayFragment)
-                        error(R.drawable.ic_load_error_vector)
-                        placeholder(R.drawable.ic_no_photo_vector)
-                        crossfade(true)
-                    }
-                    bottomSheetDescriptionHeaderView?.text = serverResponseData.title
-                    bottomSheetDescriptionView?.text = serverResponseData.explanation
+                    loadVideo(serverResponseData)
                 }
             }
             is PictureOfTheDayData.Loading -> {
+                binding.playVideoBtn.isGone = true
                 binding.imageView.load(R.drawable.ic_image_loading)
                 bottomSheetDescriptionHeaderView?.text = ""
                 bottomSheetDescriptionView?.text = ""
             }
             is PictureOfTheDayData.Error -> {
+                binding.playVideoBtn.isGone = true
                 showError(data.error.message)
                 bottomSheetDescriptionHeaderView?.text = ""
                 bottomSheetDescriptionView?.text = ""
             }
             else -> {}
         }
+    }
+
+    private fun loadVideo(serverResponseData: PictureOfTheDayDTO) {
+        binding.imageView.load(R.drawable.preview)
+        binding.playVideoBtn.apply {
+            isGone = false
+            setOnClickListener {
+                /*startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    this.data = Uri.parse(serverResponseData.url)
+                })*/
+                this@PictureOfTheDayFragment.requireActivity().supportFragmentManager.beginTransaction()
+                    .hide(this@PictureOfTheDayFragment)
+                    .add(VideoPlayerFragment.newInstance(serverResponseData.url), "")
+                    .addToBackStack("")
+                    .commit()
+            }
+        }
+        bottomSheetDescriptionHeaderView?.text = serverResponseData.title
+        bottomSheetDescriptionView?.text = serverResponseData.explanation
+    }
+
+    private fun loadImage(serverResponseData: PictureOfTheDayDTO) {
+        binding.playVideoBtn.isGone = true
+        binding.imageView.load(serverResponseData.url) {
+            lifecycle(this@PictureOfTheDayFragment)
+            error(R.drawable.ic_load_error_vector)
+            placeholder(R.drawable.ic_no_photo_vector)
+            crossfade(true)
+        }
+        bottomSheetDescriptionHeaderView?.text = serverResponseData.title
+        bottomSheetDescriptionView?.text = serverResponseData.explanation
     }
 
     private fun Fragment.showError(string: String?) {
@@ -211,6 +189,11 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString(EXTRA_CHIP_SELECTED, selectedChipName)
+        super.onSaveInstanceState(outState)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -218,7 +201,6 @@ class PictureOfTheDayFragment : Fragment() {
 
     companion object {
         fun newInstance() = PictureOfTheDayFragment()
-        private var isMain = true
         const val EXTRA_CHIP_SELECTED = "EXTRA_CHIP_SELECTED"
     }
 
