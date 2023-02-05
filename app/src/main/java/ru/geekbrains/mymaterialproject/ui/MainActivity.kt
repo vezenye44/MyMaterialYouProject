@@ -2,9 +2,14 @@ package ru.geekbrains.mymaterialproject.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.geekbrains.mymaterialproject.R
 import ru.geekbrains.mymaterialproject.databinding.MainActivityBinding
+import ru.geekbrains.mymaterialproject.ui.NASA.NASAApiFragment
 import ru.geekbrains.mymaterialproject.ui.pictureOfTheDay.PictureOfTheDayFragment
+import ru.geekbrains.mymaterialproject.ui.pictureOfTheDay.VideoPlayerFragment
+import ru.geekbrains.mymaterialproject.ui.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,6 +18,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
+
+        applyAppTheme()
+        setContentView(binding.root)
+
+        binding.navigationView.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.action_POTD -> { displayFragment(PictureOfTheDayFragment.newInstance()); true}
+                R.id.action_favorite -> { displayFragment(NASAApiFragment.newInstance()); true}
+                R.id.action_settings -> {displayFragment(SettingsFragment.newInstance()); true}
+                else -> false
+            }
+        }
+
+        if (savedInstanceState == null) {
+            binding.navigationView.selectedItemId = R.id.action_POTD
+        }
+
+    }
+
+    private fun displayFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+    }
+
+    private fun applyAppTheme() {
         getSharedPreferences(KEY_SP, MODE_PRIVATE).getString(EXTRA_THEME, THEME_STRICT).apply {
             when (this) {
                 THEME_STRICT -> {
@@ -26,14 +55,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        setContentView(binding.root)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, PictureOfTheDayFragment.newInstance())
-                .commitNow()
-        }
     }
+
 
     companion object {
         const val KEY_SP = "EXTRA_THEME_SETTINGS"
