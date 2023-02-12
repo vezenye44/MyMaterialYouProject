@@ -1,15 +1,11 @@
 package ru.geekbrains.mymaterialproject.ui.NASA
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.annotation.DrawableRes
-import coil.load
+import androidx.fragment.app.Fragment
 import ru.geekbrains.mymaterialproject.R
-
 
 
 class TestNasaMarsFragment : Fragment() {

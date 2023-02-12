@@ -15,9 +15,9 @@ const val TODAY = "today"
 const val YESTERDAY = "yesterday"
 const val BEFORE_YESTERDAY = "beforeYesterday"
 
-fun getCurrentDateTime(day : String): Date {
+fun getCurrentDateTime(day: String): Date {
     val time = Calendar.getInstance().time
-    when(day) {
+    when (day) {
         TODAY -> {}
         YESTERDAY -> {
             time.time = (time.time - MILLIS_IN_DAY)

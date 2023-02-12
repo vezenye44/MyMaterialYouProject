@@ -3,12 +3,10 @@ package ru.geekbrains.mymaterialproject.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.geekbrains.mymaterialproject.R
 import ru.geekbrains.mymaterialproject.databinding.MainActivityBinding
 import ru.geekbrains.mymaterialproject.ui.NASA.NASAApiFragment
 import ru.geekbrains.mymaterialproject.ui.pictureOfTheDay.PictureOfTheDayFragment
-import ru.geekbrains.mymaterialproject.ui.pictureOfTheDay.VideoPlayerFragment
 import ru.geekbrains.mymaterialproject.ui.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
@@ -23,10 +21,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.navigationView.setOnItemSelectedListener { item ->
-            when(item.itemId) {
-                R.id.action_POTD -> { displayFragment(PictureOfTheDayFragment.newInstance()); true}
-                R.id.action_favorite -> { displayFragment(NASAApiFragment.newInstance()); true}
-                R.id.action_settings -> {displayFragment(SettingsFragment.newInstance()); true}
+            when (item.itemId) {
+                R.id.action_POTD -> {
+                    displayFragment(PictureOfTheDayFragment.newInstance()); true
+                }
+                R.id.action_favorite -> {
+                    displayFragment(NASAApiFragment.newInstance()); true
+                }
+                R.id.action_settings -> {
+                    displayFragment(SettingsFragment.newInstance()); true
+                }
                 else -> false
             }
         }

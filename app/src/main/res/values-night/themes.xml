@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="MyAppCustomTheme" parent="Theme.MyMaterialProject">
         <item name="chipStyle">@style/MyChipStyle</item>
         <item name="tabStyle">@style/MyTabStyle</item>

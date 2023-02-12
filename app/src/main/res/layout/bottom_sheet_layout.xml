@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/bottom_sheet_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/bottomSheetBackground"
-        app:behavior_hideable="true"
-        app:behavior_peekHeight="60dp"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/bottomSheetBackground"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="60dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
     <View
-            android:id="@+id/bottomSheetLine"
-            android:layout_width="25dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:background="#663b4351"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+        android:id="@+id/bottomSheetLine"
+        android:layout_width="25dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="#663b4351"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-            android:id="@+id/bottomSheetDescriptionHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:textColor="#000"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bottomSheetLine"
-            tools:text="Two Clusters and a Comet"/>
+        android:id="@+id/bottomSheetDescriptionHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottomSheetLine"
+        tools:text="Two Clusters and a Comet" />
+
     <TextView
-            android:id="@+id/bottomSheetDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bottomSheetDescriptionHeader"
-            tools:text="This lovely starfield spans some four full moons (about 2 degrees)
+        android:id="@+id/bottomSheetDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottomSheetDescriptionHeader"
+        tools:text="This lovely starfield spans some four full moons (about 2 degrees)
 across the heroic northern constellation of Perseus. In telescopic exposures made
 during the nights of January 24, 26, and 28 it holds the famous pair of open or
 galactic star clusters h and Chi Persei with comet PanSTARRS (C/2017 T2) captured
@@ -55,5 +57,5 @@ a new visitor to the inner solar system and just over 13 light-minutes from plan
 Earth. Always a rewarding sight in binoculars, the Double Cluster is even visible to
 the unaided eye from dark locations. C/2017 T2 could remain a telescopic comet
 though. One of the brightest comets anticipated in 2020 it makes its closest approach
-to the Sun in early May."/>
+to the Sun in early May." />
 </androidx.constraintlayout.widget.ConstraintLayout>

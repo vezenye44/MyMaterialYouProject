@@ -22,7 +22,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    buildTypes.each{
+    buildTypes.each {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("app.properties").newDataInputStream())
         def nasaApiKey = properties.getProperty("NASA_API_KEY", "")

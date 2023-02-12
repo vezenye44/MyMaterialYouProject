@@ -29,7 +29,8 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedPreferences = requireActivity()?.getSharedPreferences(MainActivity.KEY_SP, Activity.MODE_PRIVATE)
+        sharedPreferences =
+            requireActivity()?.getSharedPreferences(MainActivity.KEY_SP, Activity.MODE_PRIVATE)
 
         sharedPreferences?.let { preferences ->
             val position = preferences.getInt(EXTRA_POSITION, 0)
@@ -53,21 +54,24 @@ class SettingsFragment : Fragment() {
                     when (text) {
                         getString(R.string.tab_item_strict_theme) -> {
                             sharedPreferences?.let { preferences ->
-                                preferences.edit().putString(MainActivity.EXTRA_THEME, MainActivity.THEME_STRICT)
+                                preferences.edit()
+                                    .putString(MainActivity.EXTRA_THEME, MainActivity.THEME_STRICT)
                                     .apply()
                             }
                             requireActivity().recreate()
                         }
                         getString(R.string.tab_item_light_theme) -> {
                             sharedPreferences?.let { preferences ->
-                                preferences.edit().putString(MainActivity.EXTRA_THEME, MainActivity.THEME_LIGHT)
+                                preferences.edit()
+                                    .putString(MainActivity.EXTRA_THEME, MainActivity.THEME_LIGHT)
                                     .apply()
                             }
                             requireActivity().recreate()
                         }
                         getString(R.string.tab_item_dark_theme) -> {
                             sharedPreferences?.let { preferences ->
-                                preferences.edit().putString(MainActivity.EXTRA_THEME, MainActivity.THEME_DARK)
+                                preferences.edit()
+                                    .putString(MainActivity.EXTRA_THEME, MainActivity.THEME_DARK)
                                     .apply()
                             }
                             requireActivity().recreate()
