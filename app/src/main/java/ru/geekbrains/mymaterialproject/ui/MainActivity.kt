@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import ru.geekbrains.mymaterialproject.R
 import ru.geekbrains.mymaterialproject.databinding.MainActivityBinding
 import ru.geekbrains.mymaterialproject.ui.NASA.NASAApiFragment
+import ru.geekbrains.mymaterialproject.ui.constraint.ConstraintsFragment
 import ru.geekbrains.mymaterialproject.ui.pictureOfTheDay.PictureOfTheDayFragment
 import ru.geekbrains.mymaterialproject.ui.settings.SettingsFragment
 
@@ -38,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             binding.navigationView.selectedItemId = R.id.action_POTD
         }
+
+        displayFragment(ConstraintsFragment.newInstance())
 
     }
 

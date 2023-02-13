@@ -9,6 +9,10 @@
     <string name="settings">settings</string>
     <string name="search">Search</string>
 
+    <string name="long_btn">Loooonnng</string>
+    <string name="short_btn">Short</string>
+    <string name="dependent_text_view">Press the button</string>
+
     <string name="play_video_btn">Play in</string>
 
     <string name="player_play">Play</string>
