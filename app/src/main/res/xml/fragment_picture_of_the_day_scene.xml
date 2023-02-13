@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/tools">
+
+    <ConstraintSet android:id="@+id/chips_start">
+
+        <Constraint
+            android:id="@+id/chipToday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Constraint
+            android:id="@+id/chipYesterday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Constraint
+            android:id="@+id/chipBeforeYesterday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/chip_today">
+        <Constraint
+            android:id="@+id/chipToday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chip_group_today" />
+
+        <Constraint
+            android:id="@+id/chipYesterday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chip_group_yesterday" />
+
+        <Constraint
+            android:id="@+id/chipBeforeYesterday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chip_group_before_yesterday" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/chip_yesterday">
+
+        <Constraint
+            android:id="@+id/chipYesterday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chip_group_yesterday"
+            motion:ignore="DuplicateIds" />
+
+        <Constraint
+            android:id="@+id/chipToday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chip_group_today"
+            motion:ignore="DuplicateIds" />
+
+
+        <Constraint
+            android:id="@+id/chipBeforeYesterday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chip_group_before_yesterday"
+            motion:ignore="DuplicateIds" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/chip_beforeYesterday">
+
+        <Constraint
+            android:id="@+id/chipBeforeYesterday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chip_group_before_yesterday"
+            motion:ignore="DuplicateIds" />
+
+        <Constraint
+            android:id="@+id/chipToday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chip_group_today"
+            motion:ignore="DuplicateIds" />
+
+        <Constraint
+            android:id="@+id/chipYesterday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chip_group_yesterday"
+            motion:ignore="DuplicateIds" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/chips_start"
+        app:constraintSetStart="@+id/chip_today"
+        app:duration="2000">
+        <OnClick app:targetId="@+id/chipToday" />
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@id/chips_start"
+        app:constraintSetStart="@+id/chip_yesterday"
+        app:duration="2000">
+        <OnClick app:targetId="@+id/chipYesterday" />
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@id/chips_start"
+        app:constraintSetStart="@+id/chip_beforeYesterday"
+        app:duration="2000">
+        <OnClick app:targetId="@+id/chipBeforeYesterday" />
+    </Transition>
+
+</MotionScene>

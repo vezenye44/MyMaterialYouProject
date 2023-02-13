@@ -39,8 +39,9 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/chipContainer"
+            app:layoutDescription="@xml/fragment_picture_of_the_day_scene"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -93,7 +94,7 @@
 
             </com.google.android.material.chip.ChipGroup>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.motion.widget.MotionLayout>
 
         <ru.geekbrains.mymaterialproject.util.EquilateralImageView
             android:id="@+id/imageView"
