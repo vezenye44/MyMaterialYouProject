@@ -8,6 +8,7 @@ import ru.geekbrains.mymaterialproject.databinding.MainActivityBinding
 import ru.geekbrains.mymaterialproject.ui.NASA.NASAApiFragment
 import ru.geekbrains.mymaterialproject.ui.constraint.ConstraintsFragment
 import ru.geekbrains.mymaterialproject.ui.pictureOfTheDay.PictureOfTheDayFragment
+import ru.geekbrains.mymaterialproject.ui.pictureOfTheDay.PictureOfTheDayFragmentByBehavior
 import ru.geekbrains.mymaterialproject.ui.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding.navigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_POTD -> {
-                    displayFragment(PictureOfTheDayFragment.newInstance()); true
+                    displayFragment(PictureOfTheDayFragmentByBehavior.newInstance()); true
                 }
                 R.id.action_favorite -> {
                     displayFragment(NASAApiFragment.newInstance()); true
@@ -40,7 +41,8 @@ class MainActivity : AppCompatActivity() {
             binding.navigationView.selectedItemId = R.id.action_POTD
         }
 
-        displayFragment(ConstraintsFragment.newInstance())
+//        displayFragment(PictureOfTheDayFragmentByBehavior.newInstance())
+//        displayFragment(ConstraintsFragment.newInstance())
 
     }
 

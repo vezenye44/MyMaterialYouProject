@@ -16,13 +16,13 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import ru.geekbrains.mymaterialproject.R
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayDTO
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayData
-import ru.geekbrains.mymaterialproject.databinding.FragmentPictureOfTheDayBinding
+import ru.geekbrains.mymaterialproject.databinding.FragmentPictureOfTheDayByBehaviorBinding
 import ru.geekbrains.mymaterialproject.ui.MainActivity
 import ru.geekbrains.mymaterialproject.viewmodel.pictureOfTheDay.PictureOfTheDayViewModel
 
-class PictureOfTheDayFragment : Fragment() {
+class PictureOfTheDayFragmentByBehavior : Fragment() {
 
-    private var _binding: FragmentPictureOfTheDayBinding? = null
+    private var _binding: FragmentPictureOfTheDayByBehaviorBinding? = null
     private val binding get() = _binding!!
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private var selectedChipName: String? = null
@@ -37,12 +37,7 @@ class PictureOfTheDayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
-        _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
-
-        val mainHeight = binding.main.height
-        val rootHeight = binding.root.height
-        /*binding.bottomSheetContainer*/
-
+        _binding = FragmentPictureOfTheDayByBehaviorBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -57,8 +52,8 @@ class PictureOfTheDayFragment : Fragment() {
 
         restoringChipState()
 
-        setListenersForChips()
-        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+         setListenersForChips()
+        //setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
     }
 
     private fun restoringChipState() {
@@ -142,13 +137,13 @@ class PictureOfTheDayFragment : Fragment() {
                 }
             }
             is PictureOfTheDayData.Loading -> {
-                binding.playVideoBtn.isGone = true
+                //binding.playVideoBtn.isGone = true
                 binding.imageView.load(R.drawable.ic_image_loading)
                 bottomSheetDescriptionHeaderView?.text = ""
                 bottomSheetDescriptionView?.text = ""
             }
             is PictureOfTheDayData.Error -> {
-                binding.playVideoBtn.isGone = true
+                //binding.playVideoBtn.isGone = true
                 showError(data.error.message)
                 bottomSheetDescriptionHeaderView?.text = ""
                 bottomSheetDescriptionView?.text = ""
@@ -159,27 +154,27 @@ class PictureOfTheDayFragment : Fragment() {
 
     private fun loadVideo(serverResponseData: PictureOfTheDayDTO) {
         binding.imageView.load(R.drawable.preview)
-        binding.playVideoBtn.apply {
+        /*binding.playVideoBtn.apply {
             isGone = false
             setOnClickListener {
-                /*startActivity(Intent(Intent.ACTION_VIEW).apply {
+                *//*startActivity(Intent(Intent.ACTION_VIEW).apply {
                     this.data = Uri.parse(serverResponseData.url)
-                })*/
-                this@PictureOfTheDayFragment.requireActivity().supportFragmentManager.beginTransaction()
-                    .hide(this@PictureOfTheDayFragment)
+                })*//*
+                this@PictureOfTheDayFragmentByBehavior.requireActivity().supportFragmentManager.beginTransaction()
+                    .hide(this@PictureOfTheDayFragmentByBehavior)
                     .add(VideoPlayerFragment.newInstance(serverResponseData.url), "")
                     .addToBackStack("")
                     .commit()
             }
-        }
+        }*/
         bottomSheetDescriptionHeaderView?.text = serverResponseData.title
         bottomSheetDescriptionView?.text = serverResponseData.explanation
     }
 
     private fun loadImage(serverResponseData: PictureOfTheDayDTO) {
-        binding.playVideoBtn.isGone = true
+        //binding.playVideoBtn.isGone = true
         binding.imageView.load(serverResponseData.url) {
-            lifecycle(this@PictureOfTheDayFragment)
+            lifecycle(this@PictureOfTheDayFragmentByBehavior)
             error(R.drawable.ic_load_error_vector)
             placeholder(R.drawable.ic_no_photo_vector)
             crossfade(true)
@@ -206,7 +201,7 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = PictureOfTheDayFragment()
+        fun newInstance() = PictureOfTheDayFragmentByBehavior()
         const val EXTRA_CHIP_SELECTED = "EXTRA_CHIP_SELECTED"
     }
 

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/bottomSheetBackground"
+    tools:showIn="@layout/fragment_picture_of_the_day"
     app:behavior_hideable="true"
     app:behavior_peekHeight="60dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
