@@ -60,6 +60,7 @@ class TestNasaMarsFragment : Fragment() {
         with(binding) {
             plusImageView.animate()
                 .rotation(0f)
+                .duration = duration
 
             transparentBackground.animate()
                 .alpha(0f)
