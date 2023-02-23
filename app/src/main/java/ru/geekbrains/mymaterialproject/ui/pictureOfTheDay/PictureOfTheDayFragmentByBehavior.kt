@@ -3,12 +3,13 @@ package ru.geekbrains.mymaterialproject.ui.pictureOfTheDay
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
@@ -50,10 +51,14 @@ class PictureOfTheDayFragmentByBehavior : Fragment() {
             })
         }
 
-        restoringChipState()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            binding.scrollView.setOnScrollChangeListener { _, _, _, _, _ ->
+                binding.appbar.isSelected = binding.scrollView.canScrollVertically(-1)
+            }
+        }
 
-         setListenersForChips()
-        //setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        restoringChipState()
+        setListenersForChips()
     }
 
     private fun restoringChipState() {
@@ -87,11 +92,6 @@ class PictureOfTheDayFragmentByBehavior : Fragment() {
         inflater.inflate(R.menu.menu_bottom_bar, menu)
     }
 
-    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-    }
-
     private fun setListenersForChips() {
         with(binding) {
             chipToday.setOnClickListener {
@@ -116,13 +116,6 @@ class PictureOfTheDayFragmentByBehavior : Fragment() {
             .apply()
     }
 
-    private val bottomSheetDescriptionHeaderView by lazy {
-        requireActivity().findViewById<TextView>(R.id.bottomSheetDescriptionHeader)
-    }
-    private val bottomSheetDescriptionView by lazy {
-        requireActivity().findViewById<TextView>(R.id.bottomSheetDescription)
-    }
-
     private fun renderData(data: PictureOfTheDayData) {
         when (data) {
             is PictureOfTheDayData.Success -> {
@@ -139,14 +132,14 @@ class PictureOfTheDayFragmentByBehavior : Fragment() {
             is PictureOfTheDayData.Loading -> {
                 //binding.playVideoBtn.isGone = true
                 binding.imageView.load(R.drawable.ic_image_loading)
-                bottomSheetDescriptionHeaderView?.text = ""
-                bottomSheetDescriptionView?.text = ""
+                binding.bottomSheetDescriptionHeader.text = ""
+                binding.bottomSheetDescription.text = ""
             }
             is PictureOfTheDayData.Error -> {
                 //binding.playVideoBtn.isGone = true
                 showError(data.error.message)
-                bottomSheetDescriptionHeaderView?.text = ""
-                bottomSheetDescriptionView?.text = ""
+                binding.bottomSheetDescriptionHeader.text = ""
+                binding.bottomSheetDescription.text = ""
             }
             else -> {}
         }
@@ -167,8 +160,8 @@ class PictureOfTheDayFragmentByBehavior : Fragment() {
                     .commit()
             }
         }*/
-        bottomSheetDescriptionHeaderView?.text = serverResponseData.title
-        bottomSheetDescriptionView?.text = serverResponseData.explanation
+        binding.bottomSheetDescriptionHeader.text = serverResponseData.title
+        binding.bottomSheetDescription.text = serverResponseData.explanation
     }
 
     private fun loadImage(serverResponseData: PictureOfTheDayDTO) {
@@ -179,8 +172,8 @@ class PictureOfTheDayFragmentByBehavior : Fragment() {
             placeholder(R.drawable.ic_no_photo_vector)
             crossfade(true)
         }
-        bottomSheetDescriptionHeaderView?.text = serverResponseData.title
-        bottomSheetDescriptionView?.text = serverResponseData.explanation
+        binding.bottomSheetDescriptionHeader.text = serverResponseData.title
+        binding.bottomSheetDescription.text = serverResponseData.explanation
     }
 
     private fun Fragment.showError(string: String?) {
