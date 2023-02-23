@@ -83,6 +83,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:backgroundTint="?colorPrimary"
             android:elevation="5dp"
             android:contentDescription="Open Menu" />
 
