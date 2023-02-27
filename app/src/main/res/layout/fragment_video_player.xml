@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.pictureOfTheDay.VideoPlayerFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ru.geekbrains.mymaterialproject.util.MyVideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/toggleButton"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            app:layout_constraintTop_toBottomOf="@+id/videoView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                style="?attr/materialButtonOutlinedStyle"
+                android:id="@+id/playBtn"
+                app:icon="@drawable/ic_play_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_play" />
+
+            <Button
+                android:id="@+id/pauseBtn"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_pause"
+                app:icon="@drawable/ic_pause_btn" />
+
+            <Button
+                style="?attr/materialButtonOutlinedStyle"
+                android:id="@+id/stopBtn"
+                app:icon="@drawable/ic_stop_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_stop" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
