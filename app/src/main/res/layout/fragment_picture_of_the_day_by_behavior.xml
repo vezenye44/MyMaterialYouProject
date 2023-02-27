@@ -49,9 +49,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_edit_text"
-                        android:textColor="@color/black"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -65,11 +65,11 @@
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintWidth_percent="0.9"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.9">
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chipGroup"
@@ -121,7 +121,6 @@
 
         <ru.geekbrains.mymaterialproject.util.EquilateralImageView
             android:id="@+id/imageView"
-            app:layout_scrollFlags="scroll|snap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -130,6 +129,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_scrollFlags="scroll|snap"
             app:srcCompat="@drawable/ic_no_photo_vector" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -138,19 +138,19 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:minHeight="350dp"
-        android:scrollbars="none"
         android:alpha="0.5"
         android:background="?colorPrimaryVariant"
+        android:minHeight="350dp"
+        android:scrollbars="none"
         app:behavior_overlapTop="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:minHeight="350dp"
             android:layout_margin="8dp"
             android:background="#663b4351"
+            android:minHeight="350dp"
             app:cardElevation="8dp"
             app:contentPadding="16dp">
 

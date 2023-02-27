@@ -70,7 +70,7 @@
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:paddingBottom="8dp"
-        android:text="На фото видна одна из ярчайших звёзд на небе - Ригель, а так же освещаемая ею туманность Голова Медузы."
+        android:text="На фото видна одна из ярчайших звёзд на небе - Ригель, а так же освещаемая ею туманность Голова Ведьмы."
         android:textColor="#FFFF"
         android:textSize="22sp" />
 
