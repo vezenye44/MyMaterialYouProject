@@ -9,24 +9,24 @@ import ru.geekbrains.mymaterialproject.databinding.FragmentRecyclerItemHeaderBin
 import ru.geekbrains.mymaterialproject.databinding.FragmentRecyclerItemMarsBinding
 
 class RecyclerAdapter(
-    private var listData: MutableList<Data>,
+    private var listData: MutableList<Pair<Data, Boolean>>,
     val callbackAdd: AddItem,
     val callbackRemove: RemoveItem
 ) :
     RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>() {
 
-    fun setListDataRemove(listDataNew: MutableList<Data>,position: Int){
+    fun setListDataRemove(listDataNew: MutableList<Pair<Data, Boolean>>,position: Int){
         listData = listDataNew
         notifyItemRemoved(position)
     }
 
-    fun setListDataAdd(listDataNew: MutableList<Data>,position: Int){
+    fun setListDataAdd(listDataNew: MutableList<Pair<Data, Boolean>>,position: Int){
         listData = listDataNew
         notifyItemInserted(position)
     }
 
     override fun getItemViewType(position: Int): Int {
-        return listData[position].type
+        return listData[position].first.type
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
@@ -50,7 +50,7 @@ class RecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        holder.bind(listData[position])
+        holder.bind(listData[position].first)
     }
 
     override fun getItemCount(): Int {
@@ -82,7 +82,7 @@ class RecyclerAdapter(
                 callbackRemove.remove(layoutPosition)
             }
             binding.moveItemUp.setOnClickListener {
-                if( layoutPosition != 0 && (listData[layoutPosition-1].type != TYPE_HEADER)) {
+                if( layoutPosition != 0 && (listData[layoutPosition-1].first.type != TYPE_HEADER)) {
                     listData.removeAt(layoutPosition).apply {
                         listData.add(layoutPosition-1,this)
                     }
@@ -90,12 +90,20 @@ class RecyclerAdapter(
                 }
             }
             binding.moveItemDown.setOnClickListener {
-                if( layoutPosition != listData.size-1 && (listData[layoutPosition+1].type != TYPE_HEADER)) {
+                if( layoutPosition != listData.size-1 && (listData[layoutPosition+1].first.type != TYPE_HEADER)) {
                     listData.removeAt(layoutPosition).apply {
                         listData.add(layoutPosition + 1, this)
                     }
                     notifyItemMoved(layoutPosition, layoutPosition + 1)
                 }
+            }
+
+            binding.marsDescriptionTextView.visibility = if(listData[layoutPosition].second) View.VISIBLE else View.GONE
+            binding.marsImageView.setOnClickListener {
+                listData[layoutPosition] = listData[layoutPosition].let {
+                    it.first to !it.second
+                }
+                notifyItemChanged(layoutPosition)
             }
         }
     }

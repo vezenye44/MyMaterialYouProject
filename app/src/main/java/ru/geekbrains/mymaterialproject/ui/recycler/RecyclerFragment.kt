@@ -12,14 +12,14 @@ class RecyclerFragment : Fragment() {
     private lateinit var binding: FragmentRecyclerBinding
     private lateinit var adapter: RecyclerAdapter
     private val data = arrayListOf(
-        Data("Заголовок",type= TYPE_HEADER),
-        Data("Земля",type=TYPE_EARTH),
-        Data("Земля",type=TYPE_EARTH),
-        Data("Марс", type= TYPE_MARS),
-        Data("Земля",type=TYPE_EARTH),
-        Data("Земля",type=TYPE_EARTH),
-        Data("Земля",type=TYPE_EARTH),
-        Data("Марс", type=TYPE_MARS)
+        Pair(Data("Заголовок", type = TYPE_HEADER), false),
+        Pair(Data("Земля", type = TYPE_EARTH), false),
+        Pair(Data("Земля", type = TYPE_EARTH), false),
+        Pair(Data("Марс", type = TYPE_MARS), false),
+        Pair(Data("Земля", type = TYPE_EARTH), false),
+        Pair(Data("Земля", type = TYPE_EARTH), false),
+        Pair(Data("Земля", type = TYPE_EARTH), false),
+        Pair(Data("Марс", type = TYPE_MARS), false)
     )
 
     override fun onCreateView(
@@ -39,16 +39,16 @@ class RecyclerFragment : Fragment() {
     }
 
     private val callbackAdd = AddItem {
-        data.add(it, Data("Mars(New)", type= TYPE_MARS))
-        adapter.setListDataAdd(data,it)
+        data.add(it, Pair(Data("Mars(New)", type = TYPE_MARS),false))
+        adapter.setListDataAdd(data, it)
     }
 
     private val callbackRemove = RemoveItem {
         data.removeAt(it)
-        adapter.setListDataRemove(data,it)
+        adapter.setListDataRemove(data, it)
     }
 
-    companion object{
+    companion object {
         fun newInstance() = RecyclerFragment()
     }
 }
