@@ -7,6 +7,11 @@
         android:title="@string/potd"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/action_list"
+        android:icon="@drawable/ic_list"
+        android:title="@string/recycler"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/action_favorite"
         android:icon="@drawable/ic_nasa_icon"
         android:title="@string/nasa"
