@@ -25,13 +25,13 @@ class RecyclerFragment : Fragment() {
 
         val data = arrayListOf(
             Data("Заголовок",type= TYPE_HEADER),
-            Data("Earth",type=TYPE_EARTH),
-            Data("Earth",type=TYPE_EARTH),
-            Data("Mars", type= TYPE_MARS),
-            Data("Earth",type=TYPE_EARTH),
-            Data("Earth",type=TYPE_EARTH),
-            Data("Earth",type=TYPE_EARTH),
-            Data("Mars", type=TYPE_MARS)
+            Data("Земля",type=TYPE_EARTH),
+            Data("Земля",type=TYPE_EARTH),
+            Data("Марс", type= TYPE_MARS),
+            Data("Земля",type=TYPE_EARTH),
+            Data("Земля",type=TYPE_EARTH),
+            Data("Земля",type=TYPE_EARTH),
+            Data("Марс", type=TYPE_MARS)
         )
         binding.recyclerView.adapter = RecyclerAdapter(data)
     }
