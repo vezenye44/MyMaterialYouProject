@@ -9,18 +9,18 @@ import ru.geekbrains.mymaterialproject.databinding.FragmentRecyclerItemHeaderBin
 import ru.geekbrains.mymaterialproject.databinding.FragmentRecyclerItemMarsBinding
 
 class RecyclerAdapter(
-    private var listData: List<Data>,
+    private var listData: MutableList<Data>,
     val callbackAdd: AddItem,
     val callbackRemove: RemoveItem
 ) :
     RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>() {
 
-    fun setListDataRemove(listDataNew: List<Data>,position: Int){
+    fun setListDataRemove(listDataNew: MutableList<Data>,position: Int){
         listData = listDataNew
         notifyItemRemoved(position)
     }
 
-    fun setListDataAdd(listDataNew: List<Data>,position: Int){
+    fun setListDataAdd(listDataNew: MutableList<Data>,position: Int){
         listData = listDataNew
         notifyItemInserted(position)
     }
@@ -80,6 +80,22 @@ class RecyclerAdapter(
             }
             binding.removeItemImageView.setOnClickListener {
                 callbackRemove.remove(layoutPosition)
+            }
+            binding.moveItemUp.setOnClickListener {
+                if( layoutPosition != 0 && (listData[layoutPosition-1].type != TYPE_HEADER)) {
+                    listData.removeAt(layoutPosition).apply {
+                        listData.add(layoutPosition-1,this)
+                    }
+                    notifyItemMoved(layoutPosition,layoutPosition-1)
+                }
+            }
+            binding.moveItemDown.setOnClickListener {
+                if( layoutPosition != listData.size-1 && (listData[layoutPosition+1].type != TYPE_HEADER)) {
+                    listData.removeAt(layoutPosition).apply {
+                        listData.add(layoutPosition + 1, this)
+                    }
+                    notifyItemMoved(layoutPosition, layoutPosition + 1)
+                }
             }
         }
     }
