@@ -3,7 +3,9 @@ package ru.geekbrains.mymaterialproject.ui.recycler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import ru.geekbrains.mymaterialproject.R
 import ru.geekbrains.mymaterialproject.databinding.FragmentRecyclerItemEarthBinding
 import ru.geekbrains.mymaterialproject.databinding.FragmentRecyclerItemHeaderBinding
 import ru.geekbrains.mymaterialproject.databinding.FragmentRecyclerItemMarsBinding
@@ -13,7 +15,7 @@ class RecyclerAdapter(
     val callbackAdd: AddItem,
     val callbackRemove: RemoveItem
 ) :
-    RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>() {
+    RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>(),ItemTouchHelperAdapter{
 
     fun setListDataRemove(listDataNew: MutableList<Pair<Data, Boolean>>,position: Int){
         listData = listDataNew
@@ -109,8 +111,25 @@ class RecyclerAdapter(
     }
 
     abstract class BaseViewHolder(val view: View) :
-        RecyclerView.ViewHolder(view) {
+        RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder {
         abstract fun bind(data: Data)
+        override fun onItemSelect() {
+            itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.colorSelectedItem))
+        }
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
+        }
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        listData.removeAt(fromPosition).apply {
+            listData.add(toPosition,this)
+        }
+        notifyItemMoved(fromPosition,toPosition)
+    }
+
+    override fun onItemDismiss(position: Int) {
+        callbackRemove.remove(position)
     }
 
 }
