@@ -9,6 +9,7 @@ import ru.geekbrains.mymaterialproject.ui.NASA.NASAApiFragment
 import ru.geekbrains.mymaterialproject.ui.constraint.ConstraintsFragment
 import ru.geekbrains.mymaterialproject.ui.pictureOfTheDay.PictureOfTheDayFragment
 import ru.geekbrains.mymaterialproject.ui.pictureOfTheDay.PictureOfTheDayFragmentByBehavior
+import ru.geekbrains.mymaterialproject.ui.recycler.RecyclerFragment
 import ru.geekbrains.mymaterialproject.ui.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +27,9 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.action_POTD -> {
                     displayFragment(PictureOfTheDayFragmentByBehavior.newInstance()); true
+                }
+                R.id.action_list -> {
+                    displayFragment(RecyclerFragment.newInstance()); true
                 }
                 R.id.action_favorite -> {
                     displayFragment(NASAApiFragment.newInstance()); true
