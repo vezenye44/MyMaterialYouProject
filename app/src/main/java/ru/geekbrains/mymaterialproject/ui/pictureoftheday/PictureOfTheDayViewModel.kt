@@ -10,12 +10,11 @@ import ru.geekbrains.mymaterialproject.BuildConfig
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayDTO
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayData
 import ru.geekbrains.mymaterialproject.data.retrofit.PictureOfTheDayRetrofit
-import ru.geekbrains.mymaterialproject.data.retrofit.PictureOfTheDayRetrofitImpl
 import ru.geekbrains.mymaterialproject.util.date.*
 
 class PictureOfTheDayViewModel(
     private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDayData> = MutableLiveData(),
-    private val retrofitImpl: PictureOfTheDayRetrofit = PictureOfTheDayRetrofitImpl()
+    private val retrofitImpl: PictureOfTheDayRetrofit = PictureOfTheDayRetrofit()
 ) :
     ViewModel() {
     fun getData(): LiveData<PictureOfTheDayData> {
@@ -43,7 +42,7 @@ class PictureOfTheDayViewModel(
         if (apiKey.isBlank()) {
             PictureOfTheDayData.Error(Throwable("You need API key"))
         } else {
-            (retrofitImpl as PictureOfTheDayRetrofitImpl).getRetrofitImpl()
+            (retrofitImpl as PictureOfTheDayRetrofit).getRetrofitImpl()
                 .getPictureOfTheDayByDate(apiKey, date)
                 .enqueue(object : Callback<PictureOfTheDayDTO> {
                     override fun onResponse(
