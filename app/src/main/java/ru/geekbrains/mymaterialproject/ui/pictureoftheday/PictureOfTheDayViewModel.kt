@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.viewmodel.pictureOfTheDay
+package ru.geekbrains.mymaterialproject.ui.pictureoftheday
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,8 +9,8 @@ import retrofit2.Response
 import ru.geekbrains.mymaterialproject.BuildConfig
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayDTO
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayData
-import ru.geekbrains.mymaterialproject.retrofit.PictureOfTheDayRetrofit
-import ru.geekbrains.mymaterialproject.retrofit.PictureOfTheDayRetrofitImpl
+import ru.geekbrains.mymaterialproject.data.retrofit.PictureOfTheDayRetrofit
+import ru.geekbrains.mymaterialproject.data.retrofit.PictureOfTheDayRetrofitImpl
 import ru.geekbrains.mymaterialproject.util.date.*
 
 class PictureOfTheDayViewModel(

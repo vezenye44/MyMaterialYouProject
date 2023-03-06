@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.behaviors
+package ru.geekbrains.mymaterialproject.ui.behaviors
 
 import android.content.Context
 import android.util.AttributeSet

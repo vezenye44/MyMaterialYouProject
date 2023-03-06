@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.ui.pictureOfTheDay
+package ru.geekbrains.mymaterialproject.ui.pictureoftheday
 
 import android.os.Bundle
 import android.view.LayoutInflater

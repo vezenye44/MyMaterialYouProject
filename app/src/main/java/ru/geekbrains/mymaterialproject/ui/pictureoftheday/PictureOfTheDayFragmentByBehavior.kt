@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.ui.pictureOfTheDay
+package ru.geekbrains.mymaterialproject.ui.pictureoftheday
 
 import android.app.Activity
 import android.content.Intent
@@ -6,9 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -19,7 +17,6 @@ import ru.geekbrains.mymaterialproject.data.PictureOfTheDayDTO
 import ru.geekbrains.mymaterialproject.data.PictureOfTheDayData
 import ru.geekbrains.mymaterialproject.databinding.FragmentPictureOfTheDayByBehaviorBinding
 import ru.geekbrains.mymaterialproject.ui.MainActivity
-import ru.geekbrains.mymaterialproject.viewmodel.pictureOfTheDay.PictureOfTheDayViewModel
 
 class PictureOfTheDayFragmentByBehavior : Fragment() {
 

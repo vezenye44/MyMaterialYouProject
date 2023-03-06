@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.retrofit
+package ru.geekbrains.mymaterialproject.data.retrofit
 
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
