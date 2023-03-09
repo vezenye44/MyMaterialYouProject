@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.retrofit
+package ru.geekbrains.mymaterialproject.data.retrofit
 
 import retrofit2.Call
 import retrofit2.http.GET

@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        app:layout_behavior=".behaviors.PictureContainerBehavior"
-        tools:context=".ui.pictureOfTheDay.PictureOfTheDayFragment">
+        app:layout_behavior=".ui.behaviors.PictureContainerBehavior"
+        tools:context=".ui.pictureoftheday.PictureOfTheDayFragment">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayout"

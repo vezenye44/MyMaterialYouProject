@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ru.geekbrains.mymaterialproject.R
 import ru.geekbrains.mymaterialproject.databinding.MainActivityBinding
-import ru.geekbrains.mymaterialproject.ui.NASA.NASAApiFragment
-import ru.geekbrains.mymaterialproject.ui.constraint.ConstraintsFragment
-import ru.geekbrains.mymaterialproject.ui.pictureOfTheDay.PictureOfTheDayFragment
-import ru.geekbrains.mymaterialproject.ui.pictureOfTheDay.PictureOfTheDayFragmentByBehavior
+import ru.geekbrains.mymaterialproject.ui.nasa.NASAApiFragment
+import ru.geekbrains.mymaterialproject.ui.pictureoftheday.PictureOfTheDayFragmentByBehavior
 import ru.geekbrains.mymaterialproject.ui.recycler.RecyclerFragment
 import ru.geekbrains.mymaterialproject.ui.settings.SettingsFragment
 

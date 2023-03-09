@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.ui.NASA
+package ru.geekbrains.mymaterialproject.ui.nasa
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
