@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.retrofit
+package ru.geekbrains.mymaterialproject.data.retrofit
 
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
-class PictureOfTheDayRetrofitImpl : PictureOfTheDayRetrofit {
+class PictureOfTheDayRetrofit {
 
     private val baseUrl = "https://api.nasa.gov/"
 

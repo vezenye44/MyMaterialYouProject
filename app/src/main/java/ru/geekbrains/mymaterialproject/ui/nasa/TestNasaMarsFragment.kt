@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.ui.NASA
+package ru.geekbrains.mymaterialproject.ui.nasa
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
