@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.ui.recycler
+package ru.geekbrains.mymaterialproject.util.recycler
 
 import android.os.Bundle
 import android.view.LayoutInflater

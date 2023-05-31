@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.ui.recycler
+package ru.geekbrains.mymaterialproject.util.recycler
 
 const val TYPE_EARTH = 1
 const val TYPE_MARS = 2
