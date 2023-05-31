@@ -7,7 +7,7 @@ import ru.geekbrains.mymaterialproject.R
 import ru.geekbrains.mymaterialproject.databinding.MainActivityBinding
 import ru.geekbrains.mymaterialproject.ui.nasa.NASAApiFragment
 import ru.geekbrains.mymaterialproject.ui.pictureoftheday.PictureOfTheDayFragmentByBehavior
-import ru.geekbrains.mymaterialproject.ui.recycler.RecyclerFragment
+import ru.geekbrains.mymaterialproject.util.recycler.RecyclerFragment
 import ru.geekbrains.mymaterialproject.ui.settings.SettingsFragment
 
 class MainActivity : AppCompatActivity() {

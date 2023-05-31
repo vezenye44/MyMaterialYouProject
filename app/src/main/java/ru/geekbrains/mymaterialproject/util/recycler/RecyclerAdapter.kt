@@ -1,4 +1,4 @@
-package ru.geekbrains.mymaterialproject.ui.recycler
+package ru.geekbrains.mymaterialproject.util.recycler
 
 import android.view.LayoutInflater
 import android.view.View
@@ -15,14 +15,14 @@ class RecyclerAdapter(
     val callbackAdd: AddItem,
     val callbackRemove: RemoveItem
 ) :
-    RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>(),ItemTouchHelperAdapter{
+    RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>(), ItemTouchHelperAdapter {
 
-    fun setListDataRemove(listDataNew: MutableList<Pair<Data, Boolean>>,position: Int){
+    fun setListDataRemove(listDataNew: MutableList<Pair<Data, Boolean>>, position: Int){
         listData = listDataNew
         notifyItemRemoved(position)
     }
 
-    fun setListDataAdd(listDataNew: MutableList<Pair<Data, Boolean>>,position: Int){
+    fun setListDataAdd(listDataNew: MutableList<Pair<Data, Boolean>>, position: Int){
         listData = listDataNew
         notifyItemInserted(position)
     }
